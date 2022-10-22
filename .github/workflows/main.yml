@@ -5,7 +5,7 @@ name: Run Unit and Integration Tests
 
 on:
   push:
-    branches: [ "main", "alexis/add-CI"]
+    branches: [ "main"]
   pull_request:
     branches: [ "main" ]
 
