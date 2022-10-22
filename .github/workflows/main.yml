@@ -24,7 +24,9 @@ jobs:
     - name: Get mock-api source code
       run: |
         git clone https://github.com/adeviney/mock-api-weather.git
-        cd mock-api-weather
+        echo $(pwd)
+        echo $(cd mock-api-weather)
+        pwd
     
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
