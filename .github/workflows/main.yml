@@ -21,6 +21,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Get mock-api source code
+      run: |
+        git clone https://github.com/adeviney/mock-api-weather.git
+        cd mock-api-weather
+    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -36,14 +41,9 @@ jobs:
           touch .env
           echo API_KEY = ${{ secrets.API_KEY }} >> .env
           cat .env
-          
-    - name: Get mock-api source code
-      run: git clone https://github.com/adeviney/mock-api-weather.git
       
     - name: Run Mock Server in background
-      run: |
-          cd mock-api-weather
-          node app.js &
+      run: node app.js &
     
     - name: Swift Build
       run: |
