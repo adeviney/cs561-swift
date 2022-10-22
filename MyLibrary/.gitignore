@@ -6,3 +6,7 @@ xcuserdata/
 DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 *.xcconfig
+/.swiftpm
+/.vs
+/.vscode
+*.profraw
