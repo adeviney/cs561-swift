@@ -24,20 +24,18 @@ jobs:
     - name: Get mock-api source code
       run: |
         git clone https://github.com/adeviney/mock-api-weather.git
-        echo $(pwd)
-        echo $(cd mock-api-weather)
-        pwd
     
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Install Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
         
     - name: Install dotenv
+      working-directory: ./mock-api-weather
       run: npm install dotenv --save
       
     - name: Create .env file
+      working-directory: ./mock-api-weather
       run: |
           pwd
           touch .env
@@ -45,6 +43,7 @@ jobs:
           cat .env
       
     - name: Run Mock Server in background
+      working-directory: ./mock-api-weather
       run: node app.js &
     
     - name: Swift Build
