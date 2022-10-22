@@ -1,14 +1,39 @@
 import Alamofire
+import Foundation
 
 public protocol WeatherService {
     func getTemperature() async throws -> Int
 }
 
 class WeatherServiceImpl: WeatherService {
-    let url = "https://api.openweathermap.org/data/2.5/weather?q=corvallis&units=imperial&appid=<INSERT YOUR API KEY HERE>"
+    private let mock: Bool
+    private let luckyTemp: Bool
+    private let APIKEY: String
+
+    public init(APIKEY: String? = nil, mock: Bool? = nil, luckyTemp: Bool? = nil) {
+        self.mock = mock ?? false
+        self.luckyTemp = luckyTemp ?? false
+        self.APIKEY = APIKEY ?? "1234"
+    }
 
     func getTemperature() async throws -> Int {
-        return try await withCheckedThrowingContinuation { continuation in
+            let BaseURL: () -> String = {
+            switch self.mock {
+                case true:
+                    switch self.luckyTemp {
+                        case true:
+                            return "http://localhost:3000/lucky"
+                        default:
+                            return "http://localhost:3000"
+                    }
+                default:
+                    return "https://api.openweathermap.org"
+                }
+            }
+    
+        
+    let url = "\(BaseURL())/data/2.5/weather?q=corvallis&units=imperial&appid=\(APIKEY)"
+            return try await withCheckedThrowingContinuation { continuation in
             AF.request(url, method: .get).validate(statusCode: 200..<300).responseDecodable(of: Weather.self) { response in
                 switch response.result {
                 case let .success(weather):
@@ -20,11 +45,12 @@ class WeatherServiceImpl: WeatherService {
                     continuation.resume(with: .failure(error))
                 }
             }
-        }
+        } 
     }
 }
 
-private struct Weather: Decodable {
+    
+struct Weather: Decodable {
     let main: Main
 
     struct Main: Decodable {

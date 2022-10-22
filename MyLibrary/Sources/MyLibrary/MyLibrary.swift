@@ -1,6 +1,7 @@
 public class MyLibrary {
     private let weatherService: WeatherService
 
+
     /// The class's initializer.
     ///
     /// Whenever we call the `MyLibrary()` constructor to instantiate a `MyLibrary` instance,
