@@ -48,10 +48,7 @@ jobs:
     
     - name: Swift Build
       working-directory: ./MyLibrary
-      run: |
-        cd ..
-        pwd
-        swift build -v
+      run: swift build -v
         
 
     - name: Swift Run tests
