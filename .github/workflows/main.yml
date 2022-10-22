@@ -47,6 +47,7 @@ jobs:
       run: node app.js &
     
     - name: Swift Build
+      working-directory: ./MyLibrary
       run: |
         cd ..
         pwd
@@ -54,5 +55,7 @@ jobs:
         
 
     - name: Swift Run tests
+      working-directory: ./MyLibrary
       run: swift test -v
+    
     
