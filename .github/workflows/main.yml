@@ -53,6 +53,8 @@ jobs:
 
     - name: Swift Run tests
       working-directory: ./MyLibrary
-      run: swift test -v
+      run: |
+        export API_KEY=${{ secrets.API_KEY }}
+        swift test -v
     
     
