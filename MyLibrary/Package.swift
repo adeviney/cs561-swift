@@ -31,7 +31,6 @@ let package = Package(
             dependencies: ["MyLibrary"],
             resources: [
                 .process("sampleResponse.json"),
-                .process("OpenWeatherMap-Info.plist")
             ])
     ]
 )

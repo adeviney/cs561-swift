@@ -8,12 +8,11 @@ public protocol WeatherService {
 class WeatherServiceImpl: WeatherService {
     private let mock: Bool
     private let luckyTemp: Bool
-    private let APIKEY: String
 
-    public init(APIKEY: String? = nil, mock: Bool? = nil, luckyTemp: Bool? = nil) {
+    public init(mock: Bool? = nil, luckyTemp: Bool? = nil) {
         self.mock = mock ?? false
         self.luckyTemp = luckyTemp ?? false
-        self.APIKEY = APIKEY ?? "1234"
+
     }
 
     func getTemperature() async throws -> Int {
@@ -31,8 +30,7 @@ class WeatherServiceImpl: WeatherService {
                 }
             }
     
-        
-    let url = "\(BaseURL())/data/2.5/weather?q=corvallis&units=imperial&appid=\(APIKEY)"
+    let url = "\(BaseURL())/data/2.5/weather?q=corvallis&units=imperial&appid=d7c9477357dddb826aec055177569789"
             return try await withCheckedThrowingContinuation { continuation in
             AF.request(url, method: .get).validate(statusCode: 200..<300).responseDecodable(of: Weather.self) { response in
                 switch response.result {

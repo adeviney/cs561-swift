@@ -37,7 +37,10 @@ class WeatherServiceIntegrationTests: XCTestCase {
 
     func testWeatherServiceBroadIntegration() async throws {
         // Given
-        let realWeatherService = WeatherServiceImpl()
+        var myApiKey: String? {
+            ProcessInfo.processInfo.environment["API_KEY"]
+        }
+        let realWeatherService = WeatherServiceImpl(APIKEY: myApiKey)
         let myLibrary = MyLibrary(weatherService: realWeatherService)
     
         
@@ -50,8 +53,8 @@ class WeatherServiceIntegrationTests: XCTestCase {
         XCTAssertNotNil(temp)
 
         // reasonable temperature ranges in Corvallis at this time
-        XCTAssert(temp > 60)
-        XCTAssert(temp < 80)
+        XCTAssert(temp > 45)
+        XCTAssert(temp < 75)
 
         let tempContainsEight: Bool = String(temp).contains("8")
         XCTAssertEqual(isLuckyNumber, tempContainsEight)
