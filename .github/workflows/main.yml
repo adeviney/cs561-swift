@@ -15,21 +15,17 @@ jobs:
   build:
     runs-on: macos-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
     - uses: actions/checkout@v3
     
     - name: Get mock-api source code
       run: |
-        git clone https://github.com/adeviney/mock-api-weather.git
+        git clone --depth 1 https://github.com/adeviney/mock-api-weather.git
     
     - name: Install Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         
     - name: Install dotenv
       working-directory: ./mock-api-weather
