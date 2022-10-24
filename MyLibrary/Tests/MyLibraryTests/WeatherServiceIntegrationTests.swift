@@ -40,6 +40,7 @@ class WeatherServiceIntegrationTests: XCTestCase {
         var myApiKey: String? {
             ProcessInfo.processInfo.environment["API_KEY"]
         }
+            
         let realWeatherService = WeatherServiceImpl(APIKEY: myApiKey)
         let myLibrary = MyLibrary(weatherService: realWeatherService)
     
