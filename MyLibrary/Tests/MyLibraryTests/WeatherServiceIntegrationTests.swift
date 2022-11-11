@@ -54,7 +54,7 @@ class WeatherServiceIntegrationTests: XCTestCase {
         XCTAssertNotNil(temp)
 
         // reasonable temperature ranges in Corvallis at this time
-        XCTAssert(temp > 45)
+        XCTAssert(temp > 25)
         XCTAssert(temp < 75)
 
         let tempContainsEight: Bool = String(temp).contains("8")
