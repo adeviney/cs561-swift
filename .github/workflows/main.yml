@@ -34,10 +34,8 @@ jobs:
     - name: Create .env file
       working-directory: ./mock-api-weather
       run: |
-          pwd
           touch .env
           echo API_KEY = ${{ secrets.API_KEY }} >> .env
-          cat .env
       
     - name: Run Mock Server in background
       working-directory: ./mock-api-weather
